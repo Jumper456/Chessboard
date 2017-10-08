@@ -13,25 +13,26 @@ public class ChessBoard {
 
     }
 
-    public ChessBoard() {
-    };
+    ChessBoard() {
+    }
 
-    public void prepareBoard(){
+    void prepareBoard(){
         initializeFields();
-        setStartingPieces();
+        setStandardBordOrder();
     }
     private void initializeFields(){
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
                 chessArray[row][col] = new ChessField();
             }
-        };
+        }
     }
 
-    private void setStartingPieces(){
+    //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
+    private void setStandardBordOrder(){
         chessArray[0][0].piece = new ChessPiece("R","B");
         chessArray[0][1].piece = new ChessPiece("N","B");
         chessArray[0][2].piece = new ChessPiece("B","B");
@@ -70,10 +71,11 @@ public class ChessBoard {
 
     }
 
-    public String boardAsString(){
+    //returns the current board (contained in the chessArray) as the string, this string contains the crlf to show separate rows of the board
+    String boardAsString(){
         String myString = "";
-        int row = 0;
-        int col = 0;
+        int row;
+        int col;
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
@@ -83,21 +85,22 @@ public class ChessBoard {
                     myString = myString.concat(" ");
                 }
                 else{
-                    myString = myString.concat("__ ");
+                    myString = myString.concat("-- ");
                 }
             }
             myString = myString.concat("\r\n");
 
-        };
+        }
 
         return myString;
     }
 
-    public void populateGridPane(GridPane gridPane){
+    //populates given grid pane with the current fields from chessArray
+    void populateGridPane(GridPane gridPane){
 
-        String buttonText = "";
-        int row = 0;
-        int col = 0;
+        String buttonText;
+        int row;
+        int col;
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
@@ -112,11 +115,17 @@ public class ChessBoard {
                 }
             }
 
-        };
+        }
     }
 
-    public void printBoardAsString(){
+    //prints the board as the string to the standard out
+    void printBoardAsString(){
         System.out.println(boardAsString());
+    }
+
+    //move the piece from the starting position to the target position
+    public boolean movePiece(int startRow, int startColumn, int targetRow, int targetColum){
+        return true;
     }
 
 }
