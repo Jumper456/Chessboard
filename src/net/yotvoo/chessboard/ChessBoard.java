@@ -26,13 +26,50 @@ public class ChessBoard {
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                chessArray[row][col] = new ChessField();
+                chessArray[row][col] = new ChessField(row, col);
             }
         }
     }
 
     //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
     private void setStandardBordOrder(){
+        chessArray[0][0].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK));
+        chessArray[0][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK));
+        chessArray[0][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK));
+        chessArray[0][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.BLACK));
+        chessArray[0][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.BLACK));
+        chessArray[0][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK));
+        chessArray[0][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK));
+        chessArray[0][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK));
+
+        chessArray[1][0].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][1].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][2].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][3].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][4].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][5].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][6].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+        chessArray[1][7].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK));
+
+        chessArray[6][0].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][1].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][2].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][3].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][4].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][5].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][6].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+        chessArray[6][7].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE));
+
+        chessArray[7][0].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE));
+        chessArray[7][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE));
+        chessArray[7][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE));
+        chessArray[7][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.WHITE));
+        chessArray[7][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.WHITE));
+        chessArray[7][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE));
+        chessArray[7][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE));
+        chessArray[7][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE));
+
+/*
         chessArray[0][0].setPiece(new ChessPiece("R", "B"));
         chessArray[0][1].setPiece(new ChessPiece("N", "B"));
         chessArray[0][2].setPiece(new ChessPiece("B", "B"));
@@ -68,14 +105,16 @@ public class ChessBoard {
         chessArray[6][5].setPiece(new ChessPiece("P", "W"));
         chessArray[6][6].setPiece(new ChessPiece("P", "W"));
         chessArray[6][7].setPiece(new ChessPiece("P", "W"));
+        */
 
     }
 
     /**
      * returns the current board (contained in the chessArray) as the string,
      * this string contains the crlf to show separate rows of the board
+     * nonunicode letters show the pieces and free fields
      */
-    private String boardAsString(){
+    private String boardAsStringLetters(){
         String myString = "";
         int row;
         int col;
@@ -98,6 +137,33 @@ public class ChessBoard {
         return myString;
     }
 
+    /**
+     * returns the current board (contained in the chessArray) as the string,
+     * this string contains the crlf to show separate rows of the board
+     * the unicode chess symbols are used to show the pieces and free fields
+     */
+    private String boardAsStringSymbols(){
+        String myString = "";
+        int row;
+        int col;
+
+        for (row = 0; row <= 7; row++) {
+            for (col = 0; col <= 7; col++) {
+                if(chessArray[row][col].getPiece() != null) {
+                    myString = myString.concat(chessArray[row][col].getPiece().getSymbol());
+                    myString = myString.concat(" ");
+                }
+                else{
+                    myString = myString.concat("\u26CB ");
+                }
+            }
+            myString = myString.concat("\r\n");
+
+        }
+
+        return myString;
+    }
+
     //populates given grid pane with the current fields from chessArray
     void populateGridPane(GridPane gridPane){
 
@@ -109,8 +175,9 @@ public class ChessBoard {
             for (col = 0; col <= 7; col++) {
                 if(chessArray[row][col].getPiece() != null) {
                     buttonText = "";
-                    buttonText = buttonText.concat(chessArray[row][col].getPiece().getName());
-                    buttonText = buttonText.concat(chessArray[row][col].getPiece().getColor());
+                    buttonText = buttonText.concat(chessArray[row][col].getPiece().getSymbol());
+                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getName());
+                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getColor());
                     gridPane.add(new ChessboardButton(buttonText,col,row), col, row);
                 }
                 else{
@@ -123,7 +190,7 @@ public class ChessBoard {
 
     //prints the board as the string to the standard out
     void printBoardAsString(){
-        System.out.println(boardAsString());
+        System.out.println(boardAsStringSymbols());
     }
 
     //move the piece from the starting position to the target position
