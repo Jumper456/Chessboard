@@ -2,7 +2,16 @@ package net.yotvoo.chessboard;
 
 class ChessField {
 
-    //TODO change this public piece field to private, make the constructor and change it in the invoking code
-    ChessPiece piece = null;
+    private ChessPiece piece = null;
+
+    ChessPiece getPiece() {
+        return piece;
+    }
+
+    void setPiece(ChessPiece piece) {
+        this.piece = piece;
+    }
+
+
 
 }
