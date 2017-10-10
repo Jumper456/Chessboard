@@ -31,12 +31,7 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
 
             myChessField = chessField;
 
-            if (chessField.getPiece() != null) {
-                this.setText(chessField.getPiece().getSymbol());
-            } else {
-                this.setText("");
-            }
-
+            redraw();
 
             this.setMaxSize(fieldSize, fieldSize);
             this.setMinSize(fieldSize, fieldSize);
@@ -57,12 +52,21 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
         }
     }
 
+    void redraw(){
+        if (myChessField.getPiece() != null) {
+            this.setText(myChessField.getPiece().getSymbol());
+        } else {
+            this.setText("");
+        }
+
+    }
+
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Buton event handler: " + event.toString() + " row: " + myChessField.getRow() + " column: "
                 + myChessField.getColumn());
 
-        this.myChessField.getChessBoard().buttonClicked(myChessField);
+        this.myChessField.getChessBoard().buttonClicked(myChessField, this);
     }
 
    /* public int getRow() {

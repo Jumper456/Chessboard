@@ -7,10 +7,12 @@ public class ChessBoard {
 
     //private ChessPiece clickedPiece = null;
     private ChessField clickedField = null;
+    private ChessboardButton clickedButton = null;
 
-    void buttonClicked(ChessField chessField){
+    void buttonClicked(ChessField chessField, ChessboardButton chessboardButton){
         if ((clickedField == null) && (chessField.getPiece() != null)){
             clickedField = chessField;
+            clickedButton = chessboardButton;
             System.out.println("first click set");
         }
         else{
@@ -20,6 +22,8 @@ public class ChessBoard {
                 chessField.setPiece(clickedField.getPiece());
                 clickedField.clearPiece();
                 printBoardAsString();
+                clickedButton.redraw();
+                chessboardButton.redraw();
                 clickedField = null;
             }
 
