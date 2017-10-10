@@ -5,18 +5,24 @@ import javafx.scene.layout.GridPane;
 public class ChessBoard {
     private ChessField[][] chessArray = new ChessField[8][8];
 
-    private ChessPiece clickedPiece = null;
+    //private ChessPiece clickedPiece = null;
+    private ChessField clickedField = null;
 
     void buttonClicked(ChessField chessField){
-        if ((clickedPiece == null) & (chessField.getPiece() != null)){
-            clickedPiece = chessField.getPiece();
+        if ((clickedField == null) && (chessField.getPiece() != null)){
+            clickedField = chessField;
+            System.out.println("first click set");
         }
         else{
             //TODO change the piece position if there was a piece on previously clicked field
-            if (clickedPiece != null){
-                chessField.setPiece(clickedPiece);
+            if (clickedField != null){
+                System.out.println("second click");
+                chessField.setPiece(clickedField.getPiece());
+                clickedField.clearPiece();
+                printBoardAsString();
+                clickedField = null;
             }
-            clickedPiece = null;
+
         }
 
 
@@ -42,7 +48,7 @@ public class ChessBoard {
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                chessArray[row][col] = new ChessField(row, col);
+                chessArray[row][col] = new ChessField(this, row, col);
             }
         }
     }

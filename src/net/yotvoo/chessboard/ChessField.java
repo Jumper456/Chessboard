@@ -3,11 +3,20 @@ package net.yotvoo.chessboard;
 class ChessField {
 
     private ChessPiece piece = null;
+    private ChessBoard chessBoard;
     private int column;
     private int row;
 
+    void clearPiece(){
+        piece = null;
+    }
 
-    ChessField(int column, int row) {
+    ChessBoard getChessBoard() {
+        return chessBoard;
+    }
+
+    ChessField(ChessBoard chessBoard, int column, int row) {
+        this.chessBoard = chessBoard;
         this.column = column;
         this.row = row;
     }
