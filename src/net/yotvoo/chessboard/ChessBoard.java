@@ -9,6 +9,14 @@ public class ChessBoard {
     private ChessField clickedField = null;
     private ChessboardButton clickedButton = null;
 
+    /*
+    * buttonClicked should be invoked after the chessboard button is cliked.
+    * the concept is to click first the piece you want to move and than click the target field
+    * gets the button clicked and the corresponding chessbaord field
+    * if there is no previous click recorded in clickedField variable, sets this variable
+    * if there is a previous click recorded, performs moving the piece to the field clicked as second
+    * if the previous click has been made at empty field does nothing
+    */
     void buttonClicked(ChessField chessField, ChessboardButton chessboardButton){
         if ((clickedField == null) && (chessField.getPiece() != null)){
             clickedField = chessField;
@@ -16,7 +24,6 @@ public class ChessBoard {
             System.out.println("first click set");
         }
         else{
-            //TODO change the piece position if there was a piece on previously clicked field
             if (clickedField != null){
                 System.out.println("second click");
                 chessField.setPiece(clickedField.getPiece());
