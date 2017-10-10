@@ -6,16 +6,17 @@ class ChessField {
     private int column;
     private int row;
 
+
     ChessField(int column, int row) {
         this.column = column;
         this.row = row;
     }
 
-    public int getColumn() {
+    int getColumn() {
         return column;
     }
 
-    public int getRow() {
+    int getRow() {
         return row;
     }
 

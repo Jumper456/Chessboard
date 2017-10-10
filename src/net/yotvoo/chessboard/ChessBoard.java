@@ -5,21 +5,37 @@ import javafx.scene.layout.GridPane;
 public class ChessBoard {
     private ChessField[][] chessArray = new ChessField[8][8];
 
+    private ChessPiece clickedPiece = null;
+
+    void buttonClicked(ChessField chessField){
+        if ((clickedPiece == null) & (chessField.getPiece() != null)){
+            clickedPiece = chessField.getPiece();
+        }
+        else{
+            //TODO change the piece position if there was a piece on previously clicked field
+            if (clickedPiece != null){
+                chessField.setPiece(clickedPiece);
+            }
+            clickedPiece = null;
+        }
+
+
+    }
 
     /* constructor
-     */
     public ChessBoard(ChessField[][] chessArray) {
         this.chessArray = chessArray;
 
     }
-
+     */
     ChessBoard() {
+        initializeFields();
     }
 
     void prepareBoard(){
-        initializeFields();
         setStandardBordOrder();
     }
+
     private void initializeFields(){
         int row;
         int col;
@@ -167,22 +183,24 @@ public class ChessBoard {
     //populates given grid pane with the current fields from chessArray
     void populateGridPane(GridPane gridPane){
 
-        String buttonText;
+        //String buttonText;
         int row;
         int col;
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                if(chessArray[row][col].getPiece() != null) {
-                    buttonText = "";
-                    buttonText = buttonText.concat(chessArray[row][col].getPiece().getSymbol());
+                /*if(chessArray[row][col].getPiece() != null) {
+                    //buttonText = "";
+                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getSymbol());
                     //buttonText = buttonText.concat(chessArray[row][col].getPiece().getName());
                     //buttonText = buttonText.concat(chessArray[row][col].getPiece().getColor());
-                    gridPane.add(new ChessboardButton(buttonText,col,row), col, row);
+                    gridPane.add(new ChessboardButton(chessArray[row][col]);
                 }
                 else{
                     gridPane.add(new ChessboardButton("  ", col, row), col, row);
                 }
+                */
+                gridPane.add(new ChessboardButton(chessArray[row][col]), col, row);
             }
 
         }
