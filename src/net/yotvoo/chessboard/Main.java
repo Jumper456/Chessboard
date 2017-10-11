@@ -16,6 +16,8 @@ import javafx.scene.control.Label;
 public class Main extends Application implements EventHandler<ActionEvent>{
 
     private ChessBoard chessBoard;
+    private Button newGameButton;
+    private GridPane chessBoardGridPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -23,14 +25,16 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         BorderPane borderPane = new BorderPane();
 
-        GridPane chessBoardGridPane = new GridPane();
+        chessBoardGridPane = new GridPane();
 
         borderPane.setCenter(chessBoardGridPane);
 
 
         HBox hBoxTop = new HBox();
         hBoxTop.setPadding(new Insets(5,5,5,5));
-        hBoxTop.getChildren().addAll(new Button("Nowa gra"));
+        newGameButton = new Button("Nowa gra");
+        newGameButton.setOnAction(this);
+        hBoxTop.getChildren().addAll(newGameButton);
         borderPane.setTop(hBoxTop);
 
         HBox hBoxBottom = new HBox();
@@ -40,25 +44,38 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
 
-        try {
-            chessBoard = new ChessBoard();
-            chessBoard.prepareBoard();
-            chessBoard.printBoardAsString();
-            chessBoard.populateGridPane(chessBoardGridPane);
-        }
-        catch (Exception e){
-            System.out.println("Coś się zdupiło przy inicjalizacji boarda");
-            e.printStackTrace();
-        }
+        resetBoard(chessBoardGridPane);
+
         primaryStage.setTitle("Szachownica");
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
         primaryStage.show();
     }
 
+
+    /**
+     * Destroy current board and prepare the new one
+     */
+    private void resetBoard(GridPane pane){
+        try {
+            chessBoard = new ChessBoard();
+            chessBoard.prepareBoard();
+            chessBoard.printBoardAsString();
+            chessBoard.populateGridPane(pane);
+        }
+        catch (Exception e){
+            System.out.println("Coś się zdupiło przy inicjalizacji boarda");
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Event " + event.getSource().toString());
+        if (event.getSource() == newGameButton){
+            resetBoard(chessBoardGridPane);
+        }
     }
 
     public static void main(String[] args) {
