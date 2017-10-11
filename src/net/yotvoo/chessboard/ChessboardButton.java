@@ -6,7 +6,9 @@ import javafx.scene.control.ToggleButton;
 
 class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent> {
 
-    private final double fieldSize = 80;
+    final static double FIELD_SIZE_PREF = 80;
+    final static double FIELD_SIZE_MAX = 100;
+    final static double FIELD_SIZE_MIN = 20;
 
     private ChessField myChessField;
 
@@ -30,18 +32,22 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
 
             redraw();
 
-            this.setMaxSize(fieldSize, fieldSize);
-            this.setMinSize(fieldSize, fieldSize);
+            //this.setMaxSize(fieldSize, fieldSize);
+            this.setPrefSize(FIELD_SIZE_PREF, FIELD_SIZE_PREF);
+            this.setMinSize(FIELD_SIZE_MIN, FIELD_SIZE_MIN);
             this.setOnAction(this);
 
             //if row+column is even, it should be dark field
             if ((chessField.getRow() + chessField.getColumn()) % 2 == 0) {
                 //this.setStyle("-fx-font: 44 arial; -fx-base: #b6e7c9;");
                 //Light field
-                this.setStyle("-fx-font: 34 arial; -fx-base: #FAEBD7;");
+                this.setStyle("-fx-font: 34  arial; -fx-base: #FAEBD7;");
+                //this.setStyle("-fx-base: #FAEBD7;");
+
             } else {
                 //Dark field
                 this.setStyle("-fx-font: 34 arial; -fx-base: #808080;");
+                //this.setStyle("-fx-base: #808080;");
             }
         }
         else {

@@ -1,5 +1,6 @@
 package net.yotvoo.chessboard;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class ChessBoard {
@@ -166,23 +167,55 @@ public class ChessBoard {
         int row;
         int col;
 
+        //fill the palyable fields
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                /*if(chessArray[row][col].getPiece() != null) {
-                    //buttonText = "";
-                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getSymbol());
-                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getName());
-                    //buttonText = buttonText.concat(chessArray[row][col].getPiece().getColor());
-                    gridPane.add(new ChessboardButton(chessArray[row][col]);
-                }
-                else{
-                    gridPane.add(new ChessboardButton("  ", col, row), col, row);
-                }
-                */
-                gridPane.add(new ChessboardButton(chessArray[row][col]), col, row);
+                gridPane.add(new ChessboardButton(chessArray[row][col]), col + 1, row + 1);
             }
 
         }
+
+        //Fill the border fields with coordinates
+        ChessBorderButton button;
+        for (row = 1; row <= 8; row++) {
+            button = new ChessBorderButton("" + (9 - row),false);
+            gridPane.add( button , 0, row );
+
+            button = new ChessBorderButton("" + (9 - row),false);
+            gridPane.add( button, 9, row );
+        }
+
+        for (col = 1; col <= 8; col++) {
+            button = new ChessBorderButton(columnName(col),true);
+            gridPane.add( button, col , 0 );
+
+            button = new ChessBorderButton(columnName(col),true);
+            gridPane.add( button, col , 9 );
+        }
+    }
+
+    private String columnName(int columnNumber){
+
+        String name = "?";
+        switch (columnNumber){
+            case 1: name = "A";
+                break;
+            case 2: name = "B";
+                break;
+            case 3: name = "C";
+                break;
+            case 4: name = "D";
+                break;
+            case 5: name = "E";
+                break;
+            case 6: name = "F";
+                break;
+            case 7: name = "G";
+                break;
+            case 8: name = "H";
+                break;
+        }
+        return name;
     }
 
     //prints the board as the string to the standard out
@@ -190,9 +223,10 @@ public class ChessBoard {
         System.out.println(boardAsStringSymbols());
     }
 
+    /*
     //move the piece from the starting position to the target position
     public boolean movePiece(int startRow, int startColumn, int targetRow, int targetColum){
         return true;
     }
-
+    */
 }

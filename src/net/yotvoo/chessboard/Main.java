@@ -19,12 +19,12 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Chessboard");
 
         BorderPane borderPane = new BorderPane();
 
         GridPane chessBoardGridPane = new GridPane();
+
         borderPane.setCenter(chessBoardGridPane);
 
 
@@ -50,19 +50,10 @@ public class Main extends Application implements EventHandler<ActionEvent>{
             System.out.println("Coś się zdupiło przy inicjalizacji boarda");
             e.printStackTrace();
         }
-
+        primaryStage.setTitle("Szachownica");
+        primaryStage.sizeToScene();
+        primaryStage.setResizable(false);
         primaryStage.show();
-    }
-
-    private void fillPaneWithJustButtons(GridPane layout){
-        int row;
-        int col;
-
-        for (row = 0; row <= 7; row++) {
-            for (col = 0; col <= 7; col++) {
-                layout.add(new ChessboardButton(null),col,row);
-            }
-        }
     }
 
     @Override
