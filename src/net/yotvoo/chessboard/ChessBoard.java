@@ -39,16 +39,16 @@ public class ChessBoard {
 
     }
 
-    /* constructor
-    public ChessBoard(ChessField[][] chessArray) {
-        this.chessArray = chessArray;
-
-    }
-     */
+    /*
+    * Constructor, initializes fields of the chessArray
+    */
     ChessBoard() {
         initializeFields();
     }
 
+    /*
+    * prepares the chessArray filling it with the ChessField objects
+    * */
     void prepareBoard(){
         setStandardBordOrder();
     }
@@ -101,44 +101,6 @@ public class ChessBoard {
         chessArray[7][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE));
         chessArray[7][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE));
         chessArray[7][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE));
-
-/*
-        chessArray[0][0].setPiece(new ChessPiece("R", "B"));
-        chessArray[0][1].setPiece(new ChessPiece("N", "B"));
-        chessArray[0][2].setPiece(new ChessPiece("B", "B"));
-        chessArray[0][3].setPiece(new ChessPiece("Q", "B"));
-        chessArray[0][4].setPiece(new ChessPiece("K", "B"));
-        chessArray[0][5].setPiece(new ChessPiece("B", "B"));
-        chessArray[0][6].setPiece(new ChessPiece("N", "B"));
-        chessArray[0][7].setPiece(new ChessPiece("R", "B"));
-
-        chessArray[1][0].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][1].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][2].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][3].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][4].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][5].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][6].setPiece(new ChessPiece("P", "B"));
-        chessArray[1][7].setPiece(new ChessPiece("P", "B"));
-
-        chessArray[7][0].setPiece(new ChessPiece("R", "W"));
-        chessArray[7][1].setPiece(new ChessPiece("N", "W"));
-        chessArray[7][2].setPiece(new ChessPiece("B", "W"));
-        chessArray[7][3].setPiece(new ChessPiece("Q", "W"));
-        chessArray[7][4].setPiece(new ChessPiece("K", "W"));
-        chessArray[7][5].setPiece(new ChessPiece("B", "W"));
-        chessArray[7][6].setPiece(new ChessPiece("N", "W"));
-        chessArray[7][7].setPiece(new ChessPiece("R", "W"));
-
-        chessArray[6][0].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][1].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][2].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][3].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][4].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][5].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][6].setPiece(new ChessPiece("P", "W"));
-        chessArray[6][7].setPiece(new ChessPiece("P", "W"));
-        */
 
     }
 

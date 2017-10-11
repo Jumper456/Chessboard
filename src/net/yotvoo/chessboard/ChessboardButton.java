@@ -11,15 +11,12 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
     private ChessField myChessField;
 
     public ChessField getMyChessField() {
-        return myChessField;
+       return myChessField;
     }
 
     public void setMyChessField(ChessField myChessField) {
         this.myChessField = myChessField;
     }
-
-    //private int boardRow;
-    //private int boardColumn;
 
     ChessboardButton(ChessField chessField) {
 
@@ -68,13 +65,5 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
 
         this.myChessField.getChessBoard().buttonClicked(myChessField, this);
     }
-
-   /* public int getRow() {
-        return boardRow;
-    }
-
-    public int getColumn() {
-        return boardColumn;
-    }*/
 
 }

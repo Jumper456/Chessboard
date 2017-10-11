@@ -1,9 +1,15 @@
 package net.yotvoo.chessboard;
 
 public class ChessPiece {
+
+    //String name is used for plain text version of the chessboard
     private String name = "";
+    //String color is used for plain text version of the chessboard
     private String color = "";
+    //String symbol is used to contain the unicode chess symbol font
     private String symbol = "";
+
+    //pieceType and pieceColor are used to distinguish what type of piece is it and of what color
     private PieceType pieceType = null;
     private PieceColor pieceColor = null;
 
@@ -15,8 +21,9 @@ public class ChessPiece {
         WHITE, BLACK
     }
 
-
-    String getSymbol() { return symbol; }
+    String getSymbol() {
+        return symbol;
+    }
 
     String getName() {
         return name;
@@ -34,6 +41,10 @@ public class ChessPiece {
         return pieceColor;
     }
 
+
+    /*
+    *  Constructor
+    */
     ChessPiece(PieceType pieceType, PieceColor pieceColor) {
         this.pieceType = pieceType;
         this.pieceColor = pieceColor;
@@ -97,13 +108,4 @@ public class ChessPiece {
             }
         }
     }
-
-    /* Obsolete constructor, left for any case
-    public ChessPiece(String name, String color) {
-        this.name = name;
-        this.color = color;
-
-    }
-    */
-
 }

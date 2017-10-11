@@ -7,18 +7,18 @@ class ChessField {
     private int column;
     private int row;
 
+    ChessField(ChessBoard chessBoard, int column, int row) {
+        this.chessBoard = chessBoard;
+        this.column = column;
+        this.row = row;
+    }
+
     void clearPiece(){
         piece = null;
     }
 
     ChessBoard getChessBoard() {
         return chessBoard;
-    }
-
-    ChessField(ChessBoard chessBoard, int column, int row) {
-        this.chessBoard = chessBoard;
-        this.column = column;
-        this.row = row;
     }
 
     int getColumn() {
@@ -36,7 +36,5 @@ class ChessField {
     void setPiece(ChessPiece piece) {
         this.piece = piece;
     }
-
-
 
 }
