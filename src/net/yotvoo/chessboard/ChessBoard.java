@@ -1,38 +1,64 @@
 package net.yotvoo.chessboard;
 
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 public class ChessBoard {
-    private ChessField[][] chessArray = new ChessField[8][8];
+    private ChessField[][] chessArray;
+    private ChessGame chessGame;
 
-    //private ChessPiece clickedPiece = null;
+    /*
+    * clickedField and clikedButton show which field/button has been clicked as the source field
+    * when the next click happens, it means to move the piece from this source
+    */
     private ChessField clickedField = null;
     private ChessboardButton clickedButton = null;
 
     /*
-    * buttonClicked should be invoked after the chessboard button is cliked.
-    * the concept is to click first the piece you want to move and than click the target field
+    * chessButtonClicked should be invoked after the chessboard button is cliked.
+    * the concept is to click first the field with the piece you want to move and than click the target field
     * gets the button clicked and the corresponding chessbaord field
     * if there is no previous click recorded in clickedField variable, sets this variable
     * if there is a previous click recorded, performs moving the piece to the field clicked as second
     * if the previous click has been made at empty field does nothing
     */
-    void buttonClicked(ChessField chessField, ChessboardButton chessboardButton){
+    void chessButtonClicked(ChessField chessField, ChessboardButton chessboardButton){
         if ((clickedField == null) && (chessField.getPiece() != null)){
-            clickedField = chessField;
-            clickedButton = chessboardButton;
-            System.out.println("first click set");
+            if (((chessField.getPiece().getPieceColor() == ChessPiece.PieceColor.WHITE)
+                        && chessGame.isWhiteMove())
+                    || ((chessField.getPiece().getPieceColor() == ChessPiece.PieceColor.BLACK)
+                        && !chessGame.isWhiteMove())){
+                clickedField = chessField;
+                clickedButton = chessboardButton;
+                System.out.println("first click set");
+            }
         }
         else{
+/*
+            TODO Implement isMoveLegal methode and call it here
+            moving the code below to that methode
+*/
+
+            // move the piece and change the white/black move flag
+            // check if the same piece is not clicked again
             if (clickedField != null){
-                System.out.println("second click");
-                chessField.setPiece(clickedField.getPiece());
-                clickedField.clearPiece();
-                printBoardAsString();
-                clickedButton.redraw();
-                chessboardButton.redraw();
-                clickedField = null;
+                //check if not clicked the same piece twice
+                if (clickedField != chessField) {
+                    //check if clicked empty or occupied field
+                    if (chessField.getPiece() != null){
+                        //check if attacked own or opponents piece
+                        if (chessField.getPiece().getPieceColor() == clickedField.getPiece().getPieceColor())
+                            System.out.println("Attacked own piece!");
+                        else {
+                            System.out.println("second click was valid move to occupied field");
+                            movePieceTo(chessField, chessboardButton);
+                        }
+                    }
+                    else{
+                        System.out.println("second click was valid move to empty field");
+                        movePieceTo(chessField, chessboardButton);
+                    }
+
+                }
             }
 
         }
@@ -40,10 +66,48 @@ public class ChessBoard {
 
     }
 
+    void movePieceTo(ChessField chessField, ChessboardButton chessboardButton){
+        System.out.println("moving piece");
+        recordMove(clickedField, chessField);
+        chessField.setPiece(clickedField.getPiece());
+        if (chessGame.isWhiteMove()) {
+            chessGame.setWhiteMove(false);
+        } else {
+            chessGame.setWhiteMove(true);
+        }
+        clickedField.clearPiece();
+        printBoardAsString();
+        clickedButton.redraw();
+        chessboardButton.redraw();
+        clickedField = null;
+
+    }
+
+    void recordMove(ChessField sourceField, ChessField targetField){
+        String pieceSymbol = "X";
+        String sourceCoords = "Y0";
+        String targetCoords = "Z0";
+        String record = "record not initialized";
+
+        if (sourceField.getPiece() != null)
+            pieceSymbol = sourceField.getPiece().getSymbol();
+        else
+            pieceSymbol = "???";
+
+        sourceCoords = sourceField.getCoordinates();
+        targetCoords = targetField.getCoordinates();
+
+        record = "".concat(pieceSymbol).concat(sourceCoords).concat(targetCoords);
+
+        Main.addGameScriptEntry(record);
+    }
+
     /*
     * Constructor, initializes fields of the chessArray
     */
     ChessBoard() {
+        chessArray = new ChessField[8][8];
+        chessGame = new ChessGame();
         initializeFields();
     }
 
@@ -60,9 +124,13 @@ public class ChessBoard {
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                chessArray[row][col] = new ChessField(this, row, col);
+                chessArray[row][col] = new ChessField(this, row, col, chessCooordinate(row, col));
             }
         }
+    }
+
+    private String chessCooordinate(int row, int col){
+        return columnName(col) + row;
     }
 
     //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
@@ -118,8 +186,8 @@ public class ChessBoard {
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
                 if(chessArray[row][col].getPiece() != null) {
-                    myString = myString.concat(chessArray[row][col].getPiece().getName());
-                    myString = myString.concat(chessArray[row][col].getPiece().getColor());
+                    myString = myString.concat(chessArray[row][col].getPiece().getNameStr());
+                    myString = myString.concat(chessArray[row][col].getPiece().getColorStr());
                     myString = myString.concat(" ");
                 }
                 else{

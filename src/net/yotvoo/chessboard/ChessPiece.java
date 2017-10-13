@@ -2,14 +2,14 @@ package net.yotvoo.chessboard;
 
 public class ChessPiece {
 
-    //String name is used for plain text version of the chessboard
-    private String name = "";
-    //String color is used for plain text version of the chessboard
-    private String color = "";
+    //String nameStr is used for plain text version of the chessboard
+    private String nameStr = "";
+    //String colorStr is used for plain text version of the chessboard
+    private String colorStr = "";
     //String symbol is used to contain the unicode chess symbol font
     private String symbol = "";
 
-    //pieceType and pieceColor are used to distinguish what type of piece is it and of what color
+    //pieceType and pieceColor are used to distinguish what type of piece is it and of what colorStr
     private PieceType pieceType = null;
     private PieceColor pieceColor = null;
 
@@ -25,12 +25,12 @@ public class ChessPiece {
         return symbol;
     }
 
-    String getName() {
-        return name;
+    String getNameStr() {
+        return nameStr;
     }
 
-    String getColor() {
-        return color;
+    String getColorStr() {
+        return colorStr;
     }
 
     public PieceType getPieceType() {
@@ -50,60 +50,60 @@ public class ChessPiece {
         this.pieceColor = pieceColor;
 
         if (pieceColor == PieceColor.WHITE) {
-            color = "W";
+            colorStr = "W";
             switch (pieceType) {
                 case KING:
                     symbol = "\u2654";
-                    name = "K";
+                    nameStr = "K";
                     break;
                 case QUEEN:
                     symbol = "\u2655";
-                    name = "Q";
+                    nameStr = "Q";
                     break;
                 case ROOK:
                     symbol = "\u2656";
-                    name = "R";
+                    nameStr = "R";
                     break;
                 case BISHOP:
                     symbol = "\u2657";
-                    name = "B";
+                    nameStr = "B";
                     break;
                 case KNIGHT:
                     symbol = "\u2658";
-                    name = "N";
+                    nameStr = "N";
                     break;
                 case PAWN:
                     symbol = "\u2659";
-                    name = "P";
+                    nameStr = "P";
                     break;
             }
         }
         else{
-            color = "B";
+            colorStr = "B";
             switch (pieceType) {
                 case KING:
                     symbol = "\u265A";
-                    name = "K";
+                    nameStr = "K";
                     break;
                 case QUEEN:
                     symbol = "\u265B";
-                    name = "Q";
+                    nameStr = "Q";
                     break;
                 case ROOK:
                     symbol = "\u265C";
-                    name = "R";
+                    nameStr = "R";
                     break;
                 case BISHOP:
                     symbol = "\u265D";
-                    name = "B";
+                    nameStr = "B";
                     break;
                 case KNIGHT:
                     symbol = "\u265E";
-                    name = "N";
+                    nameStr = "N";
                     break;
                 case PAWN:
                     symbol = "\u265F";
-                    name = "P";
+                    nameStr = "P";
                     break;
             }
         }
