@@ -39,7 +39,6 @@ public class ChessBoard {
 */
 
             // move the piece and change the white/black move flag
-            // check if the same piece is not clicked again
             if (clickedField != null){
                 //check if not clicked the same piece twice
                 if (clickedField != chessField) {
@@ -59,7 +58,11 @@ public class ChessBoard {
                     }
 
                 }
+                else
+                    System.out.println("Illegal move - clicked the same field twice!");
             }
+            else
+                System.out.println("Illegal move - now is opposite side move!");
 
         }
 
