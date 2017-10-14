@@ -133,7 +133,7 @@ public class ChessBoard {
     }
 
     private String chessCooordinate(int row, int col){
-        return columnName(col) + row;
+        return columnName(col+1) + (8-row);
     }
 
     //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
@@ -269,21 +269,21 @@ public class ChessBoard {
 
         String name = "?";
         switch (columnNumber){
-            case 1: name = "A";
+            case 1: name = "a";
                 break;
-            case 2: name = "B";
+            case 2: name = "b";
                 break;
-            case 3: name = "C";
+            case 3: name = "c";
                 break;
-            case 4: name = "D";
+            case 4: name = "d";
                 break;
-            case 5: name = "E";
+            case 5: name = "e";
                 break;
-            case 6: name = "F";
+            case 6: name = "e";
                 break;
-            case 7: name = "G";
+            case 7: name = "f";
                 break;
-            case 8: name = "H";
+            case 8: name = "g";
                 break;
         }
         return name;
