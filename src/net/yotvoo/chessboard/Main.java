@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.IndexRange;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -91,6 +92,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
             chessBoard.prepareBoard();
             chessBoard.printBoardAsString();
             chessBoard.populateGridPane(pane);
+            gameScript.clear();
         }
         catch (Exception e){
             System.out.println("Coś się zdupiło przy inicjalizacji boarda");
