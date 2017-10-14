@@ -16,8 +16,9 @@ public class ChessPiece {
     private PieceType pieceType = null;
     private PieceColor pieceColor = null;
 
-    public boolean isMoveLegal(ChessMove move){
-        return true;
+    public String checkMove(ChessMove move, ChessPiece targetPiece){
+        //TODO Implement the real logic of the piece movement in the classes inheriting from this
+        return "OK";
     };
 
     //need to know if the piece has already been moved, to know if Pawn can go two lines or if the castling

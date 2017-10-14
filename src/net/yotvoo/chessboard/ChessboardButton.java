@@ -66,8 +66,10 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
 
     @Override
     public void handle(ActionEvent event) {
+/*
         System.out.println("Buton event handler: " + event.toString() + " row: " + myChessField.getRow() + " column: "
                 + myChessField.getColumn());
+*/
 
         this.myChessField.getChessBoard().chessButtonClicked(myChessField, this);
     }

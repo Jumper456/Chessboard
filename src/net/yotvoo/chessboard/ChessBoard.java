@@ -22,6 +22,12 @@ public class ChessBoard {
     * if the previous click has been made at empty field does nothing
     */
     void chessButtonClicked(ChessField chessField, ChessboardButton chessboardButton){
+
+        if ((clickedField == null) && (chessField.getPiece() == null)){
+            System.out.println("First clik on occupied field, then on the field you want to move the piece to");
+            return;
+        }
+
         if ((clickedField == null) && (chessField.getPiece() != null)){
             if (((chessField.getPiece().getPieceColor() == ChessPiece.PieceColor.WHITE)
                         && chessGame.isWhiteMove())
@@ -29,50 +35,84 @@ public class ChessBoard {
                         && !chessGame.isWhiteMove())){
                 clickedField = chessField;
                 clickedButton = chessboardButton;
-                System.out.println("first click set");
+                System.out.println("OK - first click set on valid field");
             }
+            else{
+                System.out.println("Wrong - first click on the bad side!");
+            }
+
         }
         else{
-/*
-            TODO Implement isMoveLegal methode and call it here
-            moving the code below to that methode
-*/
-
-            // move the piece and change the white/black move flag
-            if (clickedField != null){
-                //check if not clicked the same piece twice
-                if (clickedField != chessField) {
-                    //check if clicked empty or occupied field
-                    if (chessField.getPiece() != null){
-                        //check if attacked own or opponents piece
-                        if (chessField.getPiece().getPieceColor() == clickedField.getPiece().getPieceColor())
-                            System.out.println("Attacked own piece!");
-                        else {
-                            System.out.println("second click was valid move to occupied field");
-                            movePieceTo(chessField, chessboardButton);
-                        }
-                    }
-                    else{
-                        System.out.println("second click was valid move to empty field");
-                        movePieceTo(chessField, chessboardButton);
-                    }
-
-                }
-                else
-                    System.out.println("Illegal move - clicked the same field twice!");
+            if (checkMoveStatus(chessField).equals("OK")) {
+                // move the piece and change the white/black move flag
+                movePieceTo(chessField, chessboardButton);
             }
-            else
-                System.out.println("Illegal move - now is opposite side move!");
-
+            else {
+                System.out.println("Wrong - Illegal move!");
+                clickedField = null;
+            }
         }
-
-
     }
 
-    void movePieceTo(ChessField chessField, ChessboardButton chessboardButton){
+    /*
+    *   move the piece and change the white/black move flag
+    *   uses the clickedField (previously clicked field) as the source
+    */
+    String checkMoveStatus(ChessField chessField){
+
+        String answer;
+        ChessMove move;
+
+        if (clickedField != null){
+            //check if not clicked the same piece twice
+            if (clickedField != chessField) {
+
+                move = new ChessMove(clickedField.getColumn(),clickedField.getRow(),
+                                        chessField.getColumn(), chessField.getRow());
+                //check if clicked empty or occupied field
+                if (chessField.getPiece() != null){
+                    //check if attacked own or opponents piece
+                    if (chessField.getPiece().getPieceColor() == clickedField.getPiece().getPieceColor()) {
+                        System.out.println("Wrong - You cannot attack own piece!");
+                        return "Wrong - You cannot attack own piece!";
+                    }
+                    else {
+                        System.out.println("OK - second click was move to occupied field");
+                        answer = clickedField.getPiece().checkMove(move, chessField.getPiece());
+                        System.out.println(answer);
+                        return answer;
+                    }
+                }
+                else{
+                    System.out.println("OK - second click was move to empty field");
+                    answer = clickedField.getPiece().checkMove(move, chessField.getPiece());
+                    System.out.println(answer);
+                    return answer;
+                }
+            }
+            else {
+                System.out.println("Wrong - Illegal move - clicked the same field twice!");
+                return "Wrong - Illegal move - clicked the same field twice!";
+            }
+        }
+        else {
+            System.out.println("Error - clickedField jest nullem, tak nie powinno się zdarzyć");
+            return "Error - clickedField jest nullem, tak nie powinno się zdarzyć";
+        }
+
+        //return "Wrong - Unknown reason why the move is illegal, but it is illegal...";
+    }
+
+    /*
+    *   move the piece and change the white/black move flag
+    *   uses the clickedField (previously clicked field) as the source
+    */
+    void movePieceTo(ChessField targetChessField, ChessboardButton chessboardButton){
+
         System.out.println("moving piece");
-        recordMove(clickedField, chessField);
-        chessField.setPiece(clickedField.getPiece());
+        recordMove(clickedField, targetChessField);
+        targetChessField.setPiece(clickedField.getPiece());
+        clickedField.getPiece().setMoved();
         if (chessGame.isWhiteMove()) {
             chessGame.setWhiteMove(false);
         } else {
@@ -127,7 +167,7 @@ public class ChessBoard {
 
         for (row = 0; row <= 7; row++) {
             for (col = 0; col <= 7; col++) {
-                chessArray[row][col] = new ChessField(this, row, col, chessCooordinate(row, col));
+                chessArray[row][col] = new ChessField(this, col, row, chessCooordinate(row, col));
             }
         }
     }
@@ -147,23 +187,23 @@ public class ChessBoard {
         chessArray[0][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
 
-        chessArray[1][0].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][1].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][2].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][3].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][4].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][5].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][6].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][7].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][0].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][1].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][2].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][3].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][4].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][5].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][6].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][7].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
 
-        chessArray[6][0].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][1].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][2].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][3].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][4].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][5].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][6].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][7].setPiece(new ChessPiece(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][0].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][1].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][2].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][3].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][4].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][5].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][6].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][7].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
 
         chessArray[7][0].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));

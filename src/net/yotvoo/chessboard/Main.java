@@ -103,10 +103,14 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Event " + event.toString());
+        //System.out.println("Event " + event.toString());
         if (event.getSource() == newGameButton){
             resetBoard(chessBoardGridPane);
         }
+    }
+
+    public static void logMsg(String message){
+        System.out.println(message);
     }
 
 
