@@ -1,7 +1,10 @@
 package net.yotvoo.chessboard;
 
+import java.security.PublicKey;
+
 public class ChessPiece {
 
+    ChessBoard chessBoard;
     //String nameStr is used for plain text version of the chessboard
     private String nameStr = "";
     //String colorStr is used for plain text version of the chessboard
@@ -12,6 +15,21 @@ public class ChessPiece {
     //pieceType and pieceColor are used to distinguish what type of piece is it and of what colorStr
     private PieceType pieceType = null;
     private PieceColor pieceColor = null;
+
+    public boolean isMoveLegal(ChessMove move){
+        return true;
+    };
+
+    //need to know if the piece has already been moved, to know if Pawn can go two lines or if the castling
+    private boolean moved = false;
+
+    public boolean isMoved(){
+        return moved;
+    }
+
+    public void setMoved(){
+        moved = true;
+    }
 
     public enum PieceType {
         ROOK, KNIGHT, BISHOP, QUEEN, KING, PAWN
@@ -45,9 +63,11 @@ public class ChessPiece {
     /*
     *  Constructor
     */
-    ChessPiece(PieceType pieceType, PieceColor pieceColor) {
+    ChessPiece(PieceType pieceType, PieceColor pieceColor, ChessBoard chessBoard) {
+        this.chessBoard = chessBoard;
         this.pieceType = pieceType;
         this.pieceColor = pieceColor;
+        this.moved = false;
 
         if (pieceColor == PieceColor.WHITE) {
             colorStr = "W";
@@ -108,4 +128,5 @@ public class ChessPiece {
             }
         }
     }
+
 }
