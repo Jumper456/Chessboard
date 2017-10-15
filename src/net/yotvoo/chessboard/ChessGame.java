@@ -8,6 +8,8 @@ public class ChessGame {
     }
 
     public boolean isWhiteMove() {
+        //for testing reason uncoment returning always true
+        //return true;
         return whiteMove;
     }
 
