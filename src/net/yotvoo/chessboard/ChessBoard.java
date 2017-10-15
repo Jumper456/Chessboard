@@ -3,7 +3,12 @@ package net.yotvoo.chessboard;
 import javafx.scene.layout.GridPane;
 
 public class ChessBoard {
+
+    //chessArray represents the chess board itself,
+    //be caution for indexing as it is not the same as the chess coordinates
+    //first index is row, second is column
     private ChessField[][] chessArray;
+
     private ChessGame chessGame;
 
     /*
@@ -12,6 +17,21 @@ public class ChessBoard {
     */
     private ChessField clickedField = null;
     private ChessboardButton clickedButton = null;
+
+    /*
+    * Getters and setters here
+    */
+
+    /*
+    * returns the cloned chessArray
+    * */
+    public ChessField[][] getChessArrayClone() {
+        return chessArray.clone();
+    }
+
+    public ChessField getChessField(int column, int row){
+        return chessArray[row][column];
+    }
 
     /*
     * chessButtonClicked should be invoked after the chessboard button is cliked.
@@ -111,13 +131,17 @@ public class ChessBoard {
 
         System.out.println("moving piece");
         recordMove(clickedField, targetChessField);
+
         targetChessField.setPiece(clickedField.getPiece());
         clickedField.getPiece().setMoved();
+
         if (chessGame.isWhiteMove()) {
             chessGame.setWhiteMove(false);
-        } else {
+        }
+        else {
             chessGame.setWhiteMove(true);
         }
+
         clickedField.clearPiece();
         printBoardAsString();
         clickedButton.redraw();
@@ -178,14 +202,14 @@ public class ChessBoard {
 
     //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
     private void setStandardBordOrder(){
-        chessArray[0][0].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK, this));
+        chessArray[0][0].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK, this));
         chessArray[0][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
-        chessArray[0][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
+        chessArray[0][7].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
 
         chessArray[1][0].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
         chessArray[1][1].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
@@ -205,14 +229,14 @@ public class ChessBoard {
         chessArray[6][6].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
         chessArray[6][7].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
 
-        chessArray[7][0].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
+        chessArray[7][0].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
-        chessArray[7][7].setPiece(new ChessPiece(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
+        chessArray[7][7].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
 
     }
 
