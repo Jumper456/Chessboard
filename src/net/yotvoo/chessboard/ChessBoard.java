@@ -202,41 +202,41 @@ public class ChessBoard {
 
     //sets standard board pieces order on the board, does not clear any existing fields, expects the board to be empty
     private void setStandardBordOrder(){
-        chessArray[0][0].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK, this));
+        chessArray[0][0].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK, this));
         chessArray[0][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
-        chessArray[0][7].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
+        chessArray[0][7].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
 
-        chessArray[1][0].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][1].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][2].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][3].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][4].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][5].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][6].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[1][7].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][0].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][1].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][2].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][3].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][4].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][5].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][6].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
+        chessArray[1][7].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.BLACK,this));
 
-        chessArray[6][0].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][1].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][2].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][3].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][4].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][5].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][6].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[6][7].setPiece(new Pawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][0].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][1].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][2].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][3].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][4].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][5].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][6].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
+        chessArray[6][7].setPiece(new ChessPiecePawn(ChessPiece.PieceType.PAWN, ChessPiece.PieceColor.WHITE,this));
 
-        chessArray[7][0].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
+        chessArray[7][0].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][1].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][6].setPiece(new ChessPiece(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
-        chessArray[7][7].setPiece(new Rook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
+        chessArray[7][7].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
 
     }
 

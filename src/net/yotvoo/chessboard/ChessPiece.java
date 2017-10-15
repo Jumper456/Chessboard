@@ -21,7 +21,7 @@ public class ChessPiece {
         return "OK";
     };
 
-    //need to know if the piece has already been moved, to know if Pawn can go two lines or if the castling
+    //need to know if the piece has already been moved, to know if ChessPiecePawn can go two lines or if the castling
     private boolean moved = false;
 
     public boolean isMoved(){

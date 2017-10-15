@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
 public class Main extends Application implements EventHandler<ActionEvent>{
 
     private ChessBoard chessBoard;

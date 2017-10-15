@@ -1,8 +1,8 @@
 package net.yotvoo.chessboard;
 
-public class Rook extends ChessPiece {
+public class ChessPieceRook extends ChessPiece {
 
-    public Rook(PieceType pieceType, PieceColor pieceColor, ChessBoard chessBoard) {
+    public ChessPieceRook(PieceType pieceType, PieceColor pieceColor, ChessBoard chessBoard) {
         super(pieceType, pieceColor, chessBoard);
     }
 
@@ -15,7 +15,7 @@ public class Rook extends ChessPiece {
         int trgRow = move.getTargetRow();
         int direction; // for white it is negative -1, for black it is positive +1
 
-        Main.logMsg("Rook move check called with move: srcCol:" + srcCol + " srcRow:" + srcRow
+        Main.logMsg("ChessPieceRook move check called with move: srcCol:" + srcCol + " srcRow:" + srcRow
                 + " trgCol:" + trgCol + " trgRow:" + trgRow);
 
         /*
@@ -30,7 +30,7 @@ public class Rook extends ChessPiece {
         //First check if the column is not changed but row is changed or row is changed but column not
 
         if ((srcCol != trgCol) && (srcRow != trgRow)){
-            return "Wrong move - Rook can go only straight line";
+            return "Wrong move - ChessPieceRook can go only straight line";
         }
 
         if (checkIfCollides(move)) {
@@ -41,7 +41,6 @@ public class Rook extends ChessPiece {
     }
 
     private boolean checkIfCollides(ChessMove move){
-        //TODO implement checkIfCollides
         int srcCol = move.getSourceCol();
         int srcRow = move.getSourceRow();
         int trgCol = move.getTargetCol();
@@ -69,7 +68,6 @@ public class Rook extends ChessPiece {
             }
         }
         else{
-            //if (srcRow < trgRow) direction = 1 else direction = -1;
             if (srcRow < trgRow){
                 for (index = srcRow + 1; index < trgRow; ++index) {
                     if (chessBoard.getChessField(srcCol, index).getPiece() != null) {
