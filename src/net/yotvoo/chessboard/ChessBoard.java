@@ -206,7 +206,7 @@ public class ChessBoard {
         chessArray[0][1].setPiece(new ChessPieceKnight(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.BLACK,this));
-        chessArray[0][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.BLACK,this));
+        chessArray[0][4].setPiece(new ChessPieceKing(ChessPiece.PieceType.KING, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][6].setPiece(new ChessPieceKnight(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.BLACK,this));
         chessArray[0][7].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.BLACK,this));
@@ -233,7 +233,7 @@ public class ChessBoard {
         chessArray[7][1].setPiece(new ChessPieceKnight(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][2].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][3].setPiece(new ChessPiece(ChessPiece.PieceType.QUEEN, ChessPiece.PieceColor.WHITE,this));
-        chessArray[7][4].setPiece(new ChessPiece(ChessPiece.PieceType.KING, ChessPiece.PieceColor.WHITE,this));
+        chessArray[7][4].setPiece(new ChessPieceKing(ChessPiece.PieceType.KING, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][5].setPiece(new ChessPiece(ChessPiece.PieceType.BISHOP, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][6].setPiece(new ChessPieceKnight(ChessPiece.PieceType.KNIGHT, ChessPiece.PieceColor.WHITE,this));
         chessArray[7][7].setPiece(new ChessPieceRook(ChessPiece.PieceType.ROOK, ChessPiece.PieceColor.WHITE,this));
