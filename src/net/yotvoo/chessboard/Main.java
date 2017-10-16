@@ -23,6 +23,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
     public static void main(String[] args) {
         launch(args);
     }
+
     public static void addGameScriptEntry(String text){
         gameScript.setText(gameScript.getText().concat(text).concat("\n"));
     }
@@ -44,8 +45,9 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         HBox hBoxTop = new HBox();
         hBoxTop.setPadding(new Insets(5,5,5,5));
-        hBoxTop.setStyle("-fx-background-color: #AAAAAA;");
+        hBoxTop.setStyle("-fx-background-color: #FAEBD7;");
         newGameButton = new Button("Nowa gra");
+        newGameButton.setStyle("-fx-font: 16  arial;");
         newGameButton.setOnAction(this);
         hBoxTop.getChildren().addAll(newGameButton);
         borderPane.setTop(hBoxTop);
@@ -59,11 +61,14 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         vBoxRight.setPrefWidth(200);
         vBoxRight.setSpacing(10);
         vBoxRight.setPadding(new Insets(5,5,5,5));
-        vBoxRight.getChildren().add(new Label("Zapis partii"));
+/*
+        Label labelGameScript = new Label("Zapis partii");
+        labelGameScript.setStyle("-fx-font: 16  arial;");
+        vBoxRight.getChildren().add(labelGameScript);
+*/
 
         gameScript = new TextArea();
         gameScript.setEditable(false);
-
 
         vBoxRight.getChildren().add(gameScript);
         vBoxRight.setVgrow( gameScript, Priority.ALWAYS );
@@ -79,6 +84,12 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         primaryStage.sizeToScene();
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        gameScript.setText("Zapis partii:\n");
+        Region content = (Region) gameScript.lookup(".content");
+        if (content != null) content.setStyle("-fx-background-color: #FAEBD7;");
+        gameScript.setStyle("-fx-font: 16  arial; -fx-background-color: #FAEBD7;");
+        //gameScript.setStyle("-fx-font: 16  arial; .text-area .content{-fx-background-color: #FAEBD7;}");
     }
 
 
@@ -92,6 +103,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
             chessBoard.printBoardAsString();
             chessBoard.populateGridPane(pane);
             gameScript.clear();
+            gameScript.setText("Zapis partii:\n");
         }
         catch (Exception e){
             System.out.println("Coś się zdupiło przy inicjalizacji boarda");
