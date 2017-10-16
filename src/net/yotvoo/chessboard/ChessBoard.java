@@ -148,6 +148,8 @@ public class ChessBoard {
         chessboardButton.redraw();
         clickedField = null;
 
+        chessGame.setNextMoveNumber();
+
     }
 
     void recordMove(ChessField sourceField, ChessField targetField){
@@ -164,7 +166,8 @@ public class ChessBoard {
         sourceCoords = sourceField.getCoordinates();
         targetCoords = targetField.getCoordinates();
 
-        record = "".concat(pieceSymbol).concat(sourceCoords).concat(targetCoords);
+        record = chessGame.getMoveNumber().toString();
+        record = record.concat(" ").concat(pieceSymbol).concat(" ").concat(sourceCoords).concat("-").concat(targetCoords);
 
         Main.addGameScriptEntry(record);
     }
