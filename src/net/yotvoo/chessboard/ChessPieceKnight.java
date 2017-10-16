@@ -13,7 +13,6 @@ public class ChessPieceKnight extends ChessPiece {
         int srcRow = move.getSourceRow();
         int trgCol = move.getTargetCol();
         int trgRow = move.getTargetRow();
-        int direction; // for white it is negative -1, for black it is positive +1
 
         Main.logMsg("ChessPieceKnight move check called with move: srcCol:" + srcCol + " srcRow:" + srcRow
                 + " trgCol:" + trgCol + " trgRow:" + trgRow);
