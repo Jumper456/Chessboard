@@ -1,31 +1,47 @@
 package net.yotvoo.chessboard;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.IndexRange;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 
 public class Main extends Application implements EventHandler<ActionEvent>{
 
+    private static TextArea gameScript;
+    private static TextArea chatArea;
+    private TextField chatTextInput;
+
     private ChessBoard chessBoard;
+
     private Button newGameButton;
+    private Button connectionButton;
+    private Button chatSendButton;
+
     private GridPane chessBoardGridPane;
     private ChessGame chessGame;
-    private static TextArea gameScript;
+
+    /*
+    * Connection Dialog elements
+    */
+    private Button connectButton;
+    private Button connectCancelButton;
+    private TextField textField;
+    private Stage connectionDialogStage;
+
 
     public static void main(String[] args) {
         launch(args);
     }
 
     public static void addGameScriptEntry(String text){
-        gameScript.setText(gameScript.getText().concat(text).concat("\n"));
+        //gameScript.setText(gameScript.getText().concat(text).concat("\n"));
+        gameScript.appendText(text.concat("\n"));
     }
 
     @Override
@@ -45,11 +61,18 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         HBox hBoxTop = new HBox();
         hBoxTop.setPadding(new Insets(5,5,5,5));
+        hBoxTop.setSpacing(10);
         hBoxTop.setStyle("-fx-background-color: #FAEBD7;");
         newGameButton = new Button("Nowa gra");
         newGameButton.setStyle("-fx-font: 16  arial;");
         newGameButton.setOnAction(this);
-        hBoxTop.getChildren().addAll(newGameButton);
+
+        connectionButton = new Button("Połączenie");
+        connectionButton .setStyle("-fx-font: 16  arial;");
+        connectionButton .setOnAction(this);
+
+
+        hBoxTop.getChildren().addAll(newGameButton, connectionButton);
         borderPane.setTop(hBoxTop);
 
         HBox hBoxBottom = new HBox();
@@ -58,7 +81,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         VBox vBoxRight = new VBox();
 //        vBoxRight.setStyle("-fx-background-color: #A00000;");
-        vBoxRight.setPrefWidth(200);
+        vBoxRight.setPrefWidth(300);
         vBoxRight.setSpacing(10);
         vBoxRight.setPadding(new Insets(5,5,5,5));
 /*
@@ -70,7 +93,19 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         gameScript = new TextArea();
         gameScript.setEditable(false);
 
-        vBoxRight.getChildren().add(gameScript);
+        chatArea= new TextArea();
+        chatArea.setWrapText(true);
+
+        chatTextInput = new TextField();
+        chatTextInput.setPromptText("Wprowadź tekst do wysłania");
+
+        chatSendButton = new Button("Wyślij");
+        chatSendButton .setStyle("-fx-font: 16  arial;");
+        chatSendButton .setOnAction(this);
+        chatSendButton.setDefaultButton(true);
+
+
+        vBoxRight.getChildren().addAll(gameScript, chatArea,chatTextInput,chatSendButton);
         vBoxRight.setVgrow( gameScript, Priority.ALWAYS );
 
         borderPane.setRight(vBoxRight);
@@ -86,12 +121,18 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         primaryStage.show();
 
         gameScript.setText("Zapis partii:\n");
-        Region content = (Region) gameScript.lookup(".content");
-        if (content != null) content.setStyle("-fx-background-color: #FAEBD7;");
-        gameScript.setStyle("-fx-font: 16  arial; -fx-background-color: #FAEBD7;");
-        //gameScript.setStyle("-fx-font: 16  arial; .text-area .content{-fx-background-color: #FAEBD7;}");
+        setTextAreaBackgroundStyle(gameScript);
+        setTextAreaBackgroundStyle(chatArea);
+        setTextAreaBackgroundStyle(chatTextInput);
+
     }
 
+    private static void setTextAreaBackgroundStyle(Control area){
+        Region content = (Region) area.lookup(".content");
+        if (content != null) content.setStyle("-fx-background-color: #FAEBD7;");
+        area.setStyle("-fx-font: 16  arial; -fx-background-color: #FAEBD7;");
+        //gameScript.setStyle("-fx-font: 16  arial; .text-area .content{-fx-background-color: #FAEBD7;}");
+    }
 
     /**
      * Destroy current board and prepare the new one
@@ -118,6 +159,71 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         if (event.getSource() == newGameButton){
             resetBoard(chessBoardGridPane);
         }
+        else if (event.getSource() == connectionButton){
+            showConnectionDialog();
+        }
+        else if (event.getSource() == connectCancelButton){
+            //Close the dialog
+            connectionDialogStage.close();
+        }
+        else if (event.getSource() == chatSendButton){
+            sendChatMsg();
+        }
+        else if (event.getSource() == connectButton){
+
+            logMsg("kliknięto klawisz nawiązania połaczenia");
+
+            //TODO nawiązanie połączenia
+
+            //Close the dialog
+            connectionDialogStage.close();
+        }
+        else {
+            logMsg("Błąd: coś kliknięto ale nie wiem co to było...");
+        }
+    }
+
+    private void sendChatMsg(){
+        logMsg("Komunikat do wysłąnia: " + chatTextInput.getText());
+        if ( !chatTextInput.getText().isEmpty() ) {
+            //TODO wysyłanie wiadomośi z chatu
+
+            chatArea.appendText("ja: " + chatTextInput.getText() + "\n");
+            chatTextInput.clear();
+        }
+
+    }
+
+
+    private void showConnectionDialog(){
+
+        connectionDialogStage = new Stage();
+        GridPane pane = new GridPane();
+
+        connectButton = new Button("Połącz");
+        connectButton.setOnAction(this);
+
+        connectCancelButton = new Button("Anuluj");
+        connectCancelButton.setOnAction(this);
+
+
+        textField = new TextField();
+        textField.setPromptText("Podaj adres servera");
+        textField.setText("localhost");
+        textField.setPrefWidth(300);
+
+        pane.add(textField, 0,0);
+        pane.add(connectButton, 1,0);
+        pane.add(connectCancelButton, 2,0);
+        pane.setPadding(new Insets(10,10,10,10));
+        pane.setHgap(10);
+
+        Scene scene = new Scene(pane);
+        connectionDialogStage.setScene(scene);
+        connectionDialogStage.initModality(Modality.APPLICATION_MODAL);
+        connectionDialogStage.setTitle("Połączenie");
+        connectionDialogStage.setResizable(false);
+        connectionDialogStage.showAndWait();
     }
 
     public static void logMsg(String message){
