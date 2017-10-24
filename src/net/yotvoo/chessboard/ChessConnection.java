@@ -3,7 +3,7 @@ package net.yotvoo.chessboard;
 public class ChessConnection {
 
     boolean connect(String address){
-
+        return false;
     }
 
     void close(){
@@ -21,6 +21,8 @@ public class ChessConnection {
 
     };
 
-    private void sendString();
+    private void sendString(){
+
+    };
 
 }
