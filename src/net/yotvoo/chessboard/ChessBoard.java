@@ -1,6 +1,10 @@
 package net.yotvoo.chessboard;
 
 import javafx.scene.layout.GridPane;
+import net.yotvoo.chessGUI.ChessBorderButton;
+import net.yotvoo.chessGUI.ChessboardButton;
+import net.yotvoo.chessGUI.Main;
+import net.yotvoo.chessgame.ChessGame;
 
 public class ChessBoard {
 
@@ -41,7 +45,7 @@ public class ChessBoard {
     * if there is a previous click recorded, performs moving the piece to the field clicked as second
     * if the previous click has been made at empty field does nothing
     */
-    void chessButtonClicked(ChessField chessField, ChessboardButton chessboardButton){
+    public void chessButtonClicked(ChessField chessField, ChessboardButton chessboardButton){
 
         if ((clickedField == null) && (chessField.getPiece() == null)){
             System.out.println("First clik on occupied field, then on the field you want to move the piece to");
@@ -175,7 +179,7 @@ public class ChessBoard {
     /*
     * Constructor, initializes fields of the chessArray
     */
-    ChessBoard() {
+    public ChessBoard() {
         chessArray = new ChessField[8][8];
         chessGame = new ChessGame();
         initializeFields();
@@ -184,7 +188,7 @@ public class ChessBoard {
     /*
     * prepares the chessArray filling it with the ChessField objects
     * */
-    void prepareBoard(){
+    public void prepareBoard(){
         setStandardBordOrder();
     }
 
@@ -299,7 +303,7 @@ public class ChessBoard {
     }
 
     //populates given grid pane with the current fields from chessArray
-    void populateGridPane(GridPane gridPane){
+    public void populateGridPane(GridPane gridPane){
 
         //String buttonText;
         int row;
@@ -357,7 +361,7 @@ public class ChessBoard {
     }
 
     //prints the board as the string to the standard out
-    void printBoardAsString(){
+    public void printBoardAsString(){
         System.out.println(boardAsStringSymbols());
     }
 

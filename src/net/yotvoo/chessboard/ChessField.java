@@ -1,6 +1,6 @@
 package net.yotvoo.chessboard;
 
-class ChessField {
+public class ChessField {
 
     private ChessPiece piece = null;
     private ChessBoard chessBoard;
@@ -19,15 +19,15 @@ class ChessField {
         piece = null;
     }
 
-    ChessBoard getChessBoard() {
+    public ChessBoard getChessBoard() {
         return chessBoard;
     }
 
-    int getColumn() {
+    public int getColumn() {
         return column;
     }
 
-    int getRow() {
+    public int getRow() {
         return row;
     }
 
@@ -35,7 +35,7 @@ class ChessField {
         return coordinates;
     }
 
-    ChessPiece getPiece() {
+    public ChessPiece getPiece() {
         return piece;
     }
 

@@ -1,4 +1,6 @@
-package net.yotvoo.chessboard;
+package net.yotvoo.chessgame;
+
+import net.yotvoo.chessboard.ChessMove;
 
 public class ChessGame {
 

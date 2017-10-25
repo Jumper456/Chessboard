@@ -1,9 +1,8 @@
-package net.yotvoo.chessboard;
+package net.yotvoo.chessGUI;
 
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import net.yotvoo.chessboard.ChessboardButton;
 
 public class ChessBorderButton extends Button {
 

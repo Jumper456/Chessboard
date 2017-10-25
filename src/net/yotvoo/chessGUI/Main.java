@@ -1,6 +1,5 @@
-package net.yotvoo.chessboard;
+package net.yotvoo.chessGUI;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.yotvoo.chessboard.ChessBoard;
+import net.yotvoo.chessgame.ChessGame;
 
 public class Main extends Application implements EventHandler<ActionEvent>{
 

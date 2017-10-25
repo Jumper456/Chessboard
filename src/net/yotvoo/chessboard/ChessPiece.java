@@ -40,7 +40,7 @@ public class ChessPiece {
         WHITE, BLACK
     }
 
-    String getSymbol() {
+    public String getSymbol() {
         return symbol;
     }
 

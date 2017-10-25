@@ -1,4 +1,4 @@
-package net.yotvoo.chessboard;
+package net.yotvoo.chessnet;
 
 public class ChessConnection {
 

@@ -1,10 +1,11 @@
-package net.yotvoo.chessboard;
+package net.yotvoo.chessGUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ToggleButton;
+import net.yotvoo.chessboard.ChessField;
 
-class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent> {
+public class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent> {
 
     final static double FIELD_SIZE_PREF = 80;
     final static double FIELD_SIZE_MAX = 100;
@@ -20,7 +21,7 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
         this.myChessField = myChessField;
     }
 
-    ChessboardButton(ChessField chessField) {
+    public ChessboardButton(ChessField chessField) {
 
         super();
 
@@ -55,7 +56,7 @@ class ChessboardButton extends ToggleButton implements EventHandler<ActionEvent>
         }
     }
 
-    void redraw(){
+    public void redraw(){
         if (myChessField.getPiece() != null) {
             this.setText(myChessField.getPiece().getSymbol());
         } else {

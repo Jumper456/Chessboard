@@ -1,5 +1,7 @@
 package net.yotvoo.chessboard;
 
+import net.yotvoo.chessGUI.Main;
+
 public class ChessPieceQueen extends ChessPiece {
 
     public ChessPieceQueen(PieceType pieceType, PieceColor pieceColor, ChessBoard chessBoard) {

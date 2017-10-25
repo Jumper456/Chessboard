@@ -1,5 +1,7 @@
 package net.yotvoo.chessboard;
 
+import net.yotvoo.chessGUI.Main;
+
 /**
  * Created by jwachowicz on 14.10.2017.
  *
