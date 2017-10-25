@@ -6,6 +6,7 @@ import net.yotvoo.chessGUI.ChessboardButton;
 import net.yotvoo.chessGUI.Main;
 import net.yotvoo.chessgame.ChessGame;
 
+
 public class ChessBoard {
 
     //chessArray represents the chess board itself,
@@ -21,10 +22,6 @@ public class ChessBoard {
     */
     private ChessField clickedField = null;
     private ChessboardButton clickedButton = null;
-
-    /*
-    * Getters and setters here
-    */
 
     /*
     * returns the cloned chessArray
@@ -365,7 +362,7 @@ public class ChessBoard {
         System.out.println(boardAsStringSymbols());
     }
 
-    /*
+       /*
     //move the piece from the starting position to the target position
     public boolean movePiece(int startRow, int startColumn, int targetRow, int targetColum){
         return true;

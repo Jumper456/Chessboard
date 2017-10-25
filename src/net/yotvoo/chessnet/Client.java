@@ -32,7 +32,7 @@ public class Client  {
      *  port: the port number
      *  username: the username
      */
-    Client(String server, int port, String username) {
+    public Client(String server, int port, String username) {
         // which calls the common constructor with the GUI set to null
         this(server, port, username, null);
     }
@@ -41,7 +41,7 @@ public class Client  {
      * Constructor call when used from a GUI
      * in console mode the ClienGUI parameter is null
      */
-    Client(String server, int port, String username, ClientGUI cg) {
+    public Client(String server, int port, String username, ClientGUI cg) {
         this.server = server;
         this.port = port;
         this.username = username;
@@ -59,7 +59,7 @@ public class Client  {
         }
         // if it failed not much I can so
         catch(Exception ec) {
-            display("Error connectiong to server:" + ec);
+            display("Error connecting to server:" + ec);
             return false;
         }
 
@@ -107,7 +107,8 @@ public class Client  {
     /*
      * To send a message to the server
      */
-    void sendMessage(Message msg) {
+    public void sendMessage(Message msg) {
+        System.out.println("--Message: " + msg.getMessage());
         try {
             sOutput.writeObject(msg);
         }

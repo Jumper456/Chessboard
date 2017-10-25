@@ -11,6 +11,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import net.yotvoo.chessboard.ChessBoard;
 import net.yotvoo.chessgame.ChessGame;
+import net.yotvoo.chessnet.Client;
+import net.yotvoo.chessnet.Message;
+import net.yotvoo.chessnet.Server;
 
 public class Main extends Application implements EventHandler<ActionEvent>{
 
@@ -19,21 +22,31 @@ public class Main extends Application implements EventHandler<ActionEvent>{
     private TextField chatTextInput;
 
     private ChessBoard chessBoard;
+    private ChessboardGUIController guiController;
 
     private Button newGameButton;
     private Button connectionButton;
+    private Button startServerButton;
     private Button chatSendButton;
 
     private GridPane chessBoardGridPane;
     private ChessGame chessGame;
 
+    private Server netServer;
+    private Client netClient;
+
     /*
-    * Connection Dialog elements
+    * Connection and Server Dialogs elements
     */
+    private TextField textField;
+
+    private Stage connectionDialogStage;
     private Button connectButton;
     private Button connectCancelButton;
-    private TextField textField;
-    private Stage connectionDialogStage;
+
+    private Stage serverDialogStage;
+    private Button initServerButton;
+    private Button serverCancelButton;
 
 
     public static void main(String[] args) {
@@ -65,15 +78,24 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         hBoxTop.setSpacing(10);
         hBoxTop.setStyle("-fx-background-color: #FAEBD7;");
         newGameButton = new Button("Nowa gra");
+        newGameButton.setTooltip(new Tooltip("Uruchom nową grę - usuwa aktualne ustawienie szachownicy!"));
         newGameButton.setStyle("-fx-font: 16  arial;");
         newGameButton.setOnAction(this);
 
         connectionButton = new Button("Połączenie");
-        connectionButton .setStyle("-fx-font: 16  arial;");
-        connectionButton .setOnAction(this);
+        connectionButton.setTooltip(new Tooltip("Połącz z serwerem gry i czatem"));
+        connectionButton.setStyle("-fx-font: 16  arial;");
+        connectionButton.setOnAction(this);
 
 
-        hBoxTop.getChildren().addAll(newGameButton, connectionButton);
+        startServerButton = new Button("Serwer");
+        startServerButton.setTooltip(new Tooltip("Uruchom serwer gry i czatu"));
+        startServerButton.setStyle("-fx-font: 16  arial;");
+        startServerButton.setOnAction(this);
+
+
+
+        hBoxTop.getChildren().addAll(newGameButton, connectionButton, startServerButton);
         borderPane.setTop(hBoxTop);
 
         HBox hBoxBottom = new HBox();
@@ -96,6 +118,9 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         chatArea= new TextArea();
         chatArea.setWrapText(true);
+        chatArea.setEditable(false);
+
+        guiController = new ChessboardGUIController(chatArea);
 
         chatTextInput = new TextField();
         chatTextInput.setPromptText("Wprowadź tekst do wysłania");
@@ -163,24 +188,44 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         else if (event.getSource() == connectionButton){
             showConnectionDialog();
         }
+        else if (event.getSource() == startServerButton){
+            showServerDialog();
+        }
         else if (event.getSource() == connectCancelButton){
             //Close the dialog
             connectionDialogStage.close();
         }
-        else if (event.getSource() == chatSendButton){
-            sendChatMsg();
+        else if (event.getSource() == serverCancelButton){
+            //Close the dialog
+            serverDialogStage.close();
         }
         else if (event.getSource() == connectButton){
 
             logMsg("kliknięto klawisz nawiązania połaczenia");
 
             //TODO nawiązanie połączenia
+            netClient = new Client("localhost",1500, "Jarek", guiController);
+            netClient.start();
 
             //Close the dialog
             connectionDialogStage.close();
         }
+        else if (event.getSource() == initServerButton){
+
+            logMsg("kliknięto klawisz uruchomienia serwera");
+
+            //TODO uruchomienie servera
+            netServer = new Server(1500);//, guiController);
+            netServer.start();
+
+            //Close the dialog
+            serverDialogStage.close();
+        }
+        else if (event.getSource() == chatSendButton){
+            sendChatMsg();
+        }
         else {
-            logMsg("Błąd: coś kliknięto ale nie wiem co to było...");
+            logMsg("Błąd: coś kliknięto ale nie wiem co to było..." + event.toString());
         }
     }
 
@@ -190,6 +235,12 @@ public class Main extends Application implements EventHandler<ActionEvent>{
             //TODO wysyłanie wiadomośi z chatu
 
             chatArea.appendText("ja: " + chatTextInput.getText() + "\n");
+            try {
+                netClient.sendMessage(new Message(1, chatTextInput.getText() + "\n"));
+            }
+            catch(Exception e){
+                logMsg(e.toString());
+            }
             chatTextInput.clear();
         }
 
@@ -200,6 +251,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
         connectionDialogStage = new Stage();
         GridPane pane = new GridPane();
+
 
         connectButton = new Button("Połącz");
         connectButton.setOnAction(this);
@@ -226,6 +278,39 @@ public class Main extends Application implements EventHandler<ActionEvent>{
         connectionDialogStage.setResizable(false);
         connectionDialogStage.showAndWait();
     }
+
+    private void showServerDialog(){
+
+        serverDialogStage = new Stage();
+        GridPane pane = new GridPane();
+
+
+        initServerButton = new Button("Uruchom serwer");
+        initServerButton .setOnAction(this);
+
+        serverCancelButton = new Button("Anuluj");
+        serverCancelButton.setOnAction(this);
+
+
+        textField = new TextField();
+        textField.setPromptText("Podaj numer portu");
+        textField.setText("55555");
+        textField.setPrefWidth(300);
+
+        pane.add(textField, 0,0);
+        pane.add(initServerButton, 1,0);
+        pane.add(serverCancelButton, 2,0);
+        pane.setPadding(new Insets(10,10,10,10));
+        pane.setHgap(10);
+
+        Scene scene = new Scene(pane);
+        serverDialogStage.setScene(scene);
+        serverDialogStage.initModality(Modality.APPLICATION_MODAL);
+        serverDialogStage.setTitle("Serwer");
+        serverDialogStage.setResizable(false);
+        serverDialogStage.showAndWait();
+    }
+
 
     public static void logMsg(String message){
         System.out.println(message);
