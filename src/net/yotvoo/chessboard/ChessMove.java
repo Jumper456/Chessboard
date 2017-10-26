@@ -18,6 +18,11 @@ public class ChessMove {
         this.targetRow = targetRow;
     }
 
+    @Override
+    public String toString(){
+        return "[MOVE " + sourceCol + " " + sourceRow + " " + targetCol + " " + targetRow + "]";
+    }
+
     public int getSourceCol() {
         return sourceCol;
     }

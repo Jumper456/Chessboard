@@ -1,0 +1,42 @@
+TODO
+
+Trzeba przerobić zarządzanie planszą tak, by operacja przesuwania elementu była
+wykonywana na modelu szachownicy i dopiero później z tego ruchu odmalowywanie widoku.
+Trzeba zatem usunąć przekazywanie i używanie przycisków do metody przenoszącej bierkę,
+tylko ona musi sobie sama znaleźć które to buttony na planszy ma zmienić. Tą samą metodę
+użyć wtedy do wykonania ruchu przesłanego siecią.
+
+Plansza powinna dać sie wyświetlać czarnymi na dole. Ale to chyba oleję na razie.
+
+
+Trzeba dodać uruchamianie gry sieciowej
+1) zalogować się na serwerze po obu stronach
+2) wybrać dialog nowej gry sieciowej
+    - sprawdzić czy jest połączenie sieciowe
+    - wysłać komunikat nowa gra
+    - gracz inicjujący gra białymi (tak będzie prościej na początek)
+    - z drugiej strony dialog akceptacji gry
+    - odesłanie potwierdzenia lub odmowy
+
+Dodać kontrolę czy mogę ruszać białymi czy czarnymi
+oraz kontrolę czy teraz mój ruch czy przeciwnika
+
+Dodać zapis ruchów przeciwnika do zapisu gry.
+
+Dodać obsługę odebrania komunikatu o ruchu - przesunięcie bierki
+Ukryć ten komunikat/ nie wyświetlać na czat
+
+Zarządzać ubijaniem połączenia przy wychodzeniu.
+
+Sprawdzać czy jest połączenie i zrobić klawisz wysyłania czatu nieaktywny dopóki nie połączoni
+i kiedy połączenie przerwane.
+
+Kiedyś dodać wybieranie pokoju, pokój może być tylko dwóosobowy (gracze) - na razie można olać pokoje
+
+Użyć parametrów z dialogu połączenia zamiast na sztywno wybranych wartości adresu i portu
+- rozszerzyć dialog połączenia o pole Port
+
+
+
+
+

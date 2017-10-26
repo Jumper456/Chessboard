@@ -10,12 +10,14 @@ public class ChessboardGUIController implements ClientGUI, ServerGUI {
 
     TextArea chatTextArea;
 
+
     public ChessboardGUIController(TextArea textArea) {
         chatTextArea = textArea;
     }
 
     @Override
     public void append(String textStr) {
+
         chatTextArea.appendText("\n" + textStr);
     }
 

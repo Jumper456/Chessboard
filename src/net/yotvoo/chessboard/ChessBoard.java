@@ -5,6 +5,7 @@ import net.yotvoo.chessGUI.ChessBorderButton;
 import net.yotvoo.chessGUI.ChessboardButton;
 import net.yotvoo.chessGUI.Main;
 import net.yotvoo.chessgame.ChessGame;
+import net.yotvoo.chessnet.Client;
 
 
 public class ChessBoard {
@@ -171,6 +172,13 @@ public class ChessBoard {
         record = record.concat(" ").concat(pieceSymbol).concat(" ").concat(sourceCoords).concat("-").concat(targetCoords);
 
         Main.addGameScriptEntry(record);
+        chessGame.sendMove(new ChessMove(sourceField.getColumn(),
+                                            sourceField.getRow(),
+                                            targetField.getColumn(),
+                                            targetField.getRow())
+        );
+
+
     }
 
     /*
@@ -368,4 +376,8 @@ public class ChessBoard {
         return true;
     }
     */
+
+    public void setNetClient(Client netClinet){
+        chessGame.setNetClient(netClinet);
+    }
 }

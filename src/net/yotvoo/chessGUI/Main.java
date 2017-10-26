@@ -32,6 +32,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
     private GridPane chessBoardGridPane;
     private ChessGame chessGame;
 
+
     private Server netServer;
     private Client netClient;
 
@@ -54,9 +55,17 @@ public class Main extends Application implements EventHandler<ActionEvent>{
     }
 
     public static void addGameScriptEntry(String text){
-        //gameScript.setText(gameScript.getText().concat(text).concat("\n"));
         gameScript.appendText(text.concat("\n"));
     }
+
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        if ( netClient != null ){
+            netClient.disconnect();
+        }
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -206,6 +215,7 @@ public class Main extends Application implements EventHandler<ActionEvent>{
             //TODO nawiązanie połączenia
             netClient = new Client("localhost",1500, "Jarek", guiController);
             netClient.start();
+            chessBoard.setNetClient(netClient);
 
             //Close the dialog
             connectionDialogStage.close();
